@@ -9,82 +9,91 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
+    @Environment(\.managedObjectContext) private var context
+    
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [],
         animation: .default)
-    private var items: FetchedResults<Item>
-
+    private var debtors: FetchedResults<Debtor>
+    
+    @State var showingDebtorSheet = false
+    @State var showingExpenseSheet = false
+    @State var debtorName = ""
+    
+    @State var editingDebtor: Debtor? = nil
+    
     var body: some View {
-        NavigationView {
+        VStack {
+            Button("Adicionar Devedor") {
+                showingDebtorSheet.toggle()
+            }
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                ForEach(debtors) { debtor in
+                    Section(debtor.wName) {
+                        Button {
+                            editingDebtor = debtor
+                        } label: {
+                            Label("Adicionar Gasto", systemImage: "plus")
+                        }
+                        
+                        ForEach(debtor.expenseArray) { expense in
+                            HStack {
+                                Text(expense.wName)
+                                    .font(.body)
+                                Spacer()
+                                Text(expense.currencyValue)
+                            }
+                            .swipeActions {
+                                Label("Pagar", systemImage: "plus")
+                            }
+                        }
+                        
+                        HStack {
+                            Text("Total")
+                                .fontWeight(.bold)
+                            Spacer()
+                            Text(debtor.totalCurrenyValue)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                .fontWeight(.bold)
+                        }
+                        
                     }
                 }
-                .onDelete(perform: deleteItems)
             }
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+            .sheet(isPresented: $showingDebtorSheet) {
+                VStack {
+                    TextField("Nome do Devedor", text: $debtorName)
+                    Spacer()
+                    Button(action: handleSaveNewDebtor) {
+                        Text("Adicionar Devedor")
+                    }.disabled(debtorName.isEmpty)
                 }
             }
-            Text("Select an item")
+            .sheet(item: $editingDebtor) { debtor in
+                CreateExpense(debtor: debtor)
+            }
+            .navigationTitle("Dashboard")
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+    
+    func handleSaveNewDebtor() {
+        let newDebtor = Debtor(context: context)
+        newDebtor.name = debtorName
+        
+        do {
+            try context.save()
+            debtorName = ""
+            showingDebtorSheet = false
+        } catch {
+            print("Error saving debtor: \(error.localizedDescription)")
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        NavigationView {
+            ContentView()
+        }
     }
 }

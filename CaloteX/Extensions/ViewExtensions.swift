@@ -10,7 +10,7 @@ import SwiftUI
 extension View {
     func previewWithEnviromentObjects() -> some View {
         return self
-            .environmentObject(AppStateViewModel())
+        //            .environmentObject(AppStateViewModel())
     }
     
     func cardView() -> some View {
@@ -27,5 +27,19 @@ struct CardView: ViewModifier {
             .padding(.vertical, 24)
             .background(Color(.secondarySystemBackground))
             .cornerRadius(12)
+    }
+}
+
+struct AppButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+        //            .buttonStyle(.borderedProminent)
+        //            .controlSize(.large)
+        //            .tint(Color(.systemBlue))
+        //            .padding(.horizontal)
+            .padding()
+            .background(Color(red: 0, green: 0, blue: 0.5))
+            .foregroundStyle(.white)
+            .clipShape(Capsule())
     }
 }

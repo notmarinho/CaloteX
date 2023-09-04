@@ -28,7 +28,7 @@ struct CaloteXApp: App {
                             Text("Novo Gasto")
                                 .tag(Tab.dollar)
                             
-                            Text("Configurações")
+                            SettingsView()
                                 .tag(Tab.gearshape)
                         }
                        

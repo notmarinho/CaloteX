@@ -13,6 +13,8 @@ class CoreDataViewModel: ObservableObject {
     let container: NSPersistentContainer
     let context: NSManagedObjectContext
     
+    @Published var period: Date = Date()
+    
     init() {
         container = NSPersistentContainer(name: "CaloteX")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -24,6 +26,10 @@ class CoreDataViewModel: ObservableObject {
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
         context = container.viewContext
+    }
+    
+    func updatePeriod(_ to: Date) {
+        period = to
     }
     
     func addExpense(title: String, value: String, date: Date, debtor: Debtor) {

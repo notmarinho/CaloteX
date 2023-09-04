@@ -38,8 +38,11 @@ struct ContentView: View {
                                 Spacer()
                                 Text(expense.currencyValue)
                             }
-                            .swipeActions {
-                                Label("Pagar", systemImage: "plus")
+                        }
+                        .onDelete { indexSet in
+                            for index in indexSet {
+                                let expenseToDelete = debtor.expenseArray[index]
+                                expenseToDelete.delete()
                             }
                         }
                     } header: {

@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class CoreDataViewModel: ObservableObject {
     let container: NSPersistentContainer
@@ -33,6 +34,14 @@ class CoreDataViewModel: ObservableObject {
         newExpense.owner = debtor
         
         save()
+    }
+    
+    func deleteExpense(offsets: IndexSet, expenses: FetchedResults<Expense>) {
+        withAnimation {
+            offsets.map {
+                expenses[$0]
+            }.forEach(context.delete)
+        }
     }
     
     func addDebtor(name: String) {

@@ -24,4 +24,16 @@ public class Expense: NSManagedObject {
     var currencyValue: String {
         toCurrency(self.value)
     }
+    
+    func delete() {
+        let context = self.managedObjectContext
+        context?.delete(self)
+        
+        do {
+            try context?.save()
+        } catch {
+            // Handle the error if the save operation fails
+            print("Error deleting object: \(error)")
+        }
+    }
 }

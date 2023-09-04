@@ -24,11 +24,13 @@ public class Debtor: NSManagedObject {
         }
     }
     
-    var totalCurrenyValue: String {
-        let totalAmount = self.expenseArray.reduce(0) {
+    var totalDue: Double  {
+        self.expenseArray.reduce(0) {
             $0 + $1.value
         }
-        
-        return toCurrency(totalAmount)
+    }
+    
+    var totalCurrenyValue: String {
+        toCurrency(self.totalDue)
     }
 }

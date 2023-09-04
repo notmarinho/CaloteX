@@ -21,6 +21,8 @@ struct PersistenceController {
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 print("Something went wrong while reading data persistent \(error)")
+            } else {
+                print("Data loaded successfuly!")
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true

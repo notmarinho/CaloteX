@@ -2,7 +2,7 @@
 //  Debtor+CoreDataProperties.swift
 //  CaloteX
 //
-//  Created by Mateus Marinho on 03/09/23.
+//  Created by Mateus Marinho on 04/09/23.
 //
 //
 
@@ -16,7 +16,7 @@ extension Debtor {
         return NSFetchRequest<Debtor>(entityName: "Debtor")
     }
 
-    @NSManaged public var name: String?
+    @NSManaged public var name_: String?
     @NSManaged public var expense: NSSet?
 
 }

@@ -11,15 +11,16 @@ import CoreData
 
 @objc(Debtor)
 public class Debtor: NSManagedObject {
-    var wName: String {
-        self.name ?? "Devedor Desconhecido"
+    var name: String {
+        get { self.name_ ?? "Devedor Desconhecido" }
+        set { self.name_ = newValue }
     }
     
     var expenseArray: [Expense] {
         let set = expense as? Set<Expense> ?? []
         
         return set.sorted {
-            $0.wDate < $1.wDate
+            $0.date < $1.date
         }
     }
     

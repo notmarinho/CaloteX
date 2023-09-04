@@ -8,58 +8,57 @@
 import SwiftUI
 
 struct CreateExpense: View {
-    @Environment(\.managedObjectContext) private var context
+    @EnvironmentObject var CoreDataVM: CoreDataViewModel
     @Environment(\.dismiss) var dismiss
-
+    
     var debtor: Debtor
     
     @State var name = ""
-    @State var value = "0"
+    @State var value = ""
     @State var fixed = false
     @State var date = Date()
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Dívida de \(debtor.wName)")
-                .font(.largeTitle)
-            Section("") {
-                TextField("Nome do Gasto", text: $name)
-                    .textFieldStyle(.roundedBorder)
-                TextField("Nome do Gasto", text: $value)
-                    .textFieldStyle(.roundedBorder)
-                    .keyboardType(.decimalPad)
-            }
-            Section("Opcionais") {
-                Toggle(isOn: $fixed, label: {Text("Fixo")})
-                DatePicker("Dia da Compra", selection: $date, displayedComponents: .date)
-                    .datePickerStyle(.compact)
-            }
             
+            List {
+                Section("Nova dívida de \(debtor.name)") {
+                    TextField("Nome do Gasto", text: $name)
+                    
+                    TextField(text: $value) {
+                        Label("Valor", systemImage: "dollarsign")
+                    }
+                    
+                }
+                
+                Section("Opcionais") {
+                    Toggle(isOn: $fixed, label: {Text("Fixo")})
+                    DatePicker("Dia da Compra", selection: $date, displayedComponents: .date)
+                        .datePickerStyle(.compact)
+                }
+            }
             Spacer()
-         
-            Button("Adicionar", action: handleSaveExpense)
-                .buttonStyle(.borderedProminent)
+            
+            Button {
+                handleSaveExpense()
+            }
+        label: {
+            Text("Cadastrar")
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .controlSize(.large)
+        .tint(Color(.systemBlue))
+        .padding(.horizontal)
             
         }
-        .padding()
     }
     
     func handleSaveExpense() {
-        do {
-            let newExpense = Expense(context: context)
-            newExpense.name = name
-            newExpense.date = date
-            newExpense.value = Double(value) ?? 0
-            newExpense.fixed = fixed
-            newExpense.owner = debtor
-            
-            try context.save()
-            
-            clearState()
-            dismiss()
-        } catch {
-            print("Something Went Wrong Saving the Expense")
-        }
+        CoreDataVM.addExpense(title: name, value: value, date: date, debtor: debtor)
+
+        clearState()
+        dismiss()
     }
     
     func clearState() {

@@ -21,6 +21,7 @@
 		6357A0052AA563E600A27E9E /* AppStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6357A0042AA563E600A27E9E /* AppStateViewModel.swift */; };
 		6357A0082AA564BC00A27E9E /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6357A0072AA564BC00A27E9E /* ViewExtensions.swift */; };
 		6357A00B2AA5654900A27E9E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6357A00A2AA5654900A27E9E /* Formatters.swift */; };
+		6357A01D2AA58BBD00A27E9E /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6357A01C2AA58BBD00A27E9E /* CoreDataViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		6357A0042AA563E600A27E9E /* AppStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateViewModel.swift; sourceTree = "<group>"; };
 		6357A0072AA564BC00A27E9E /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		6357A00A2AA5654900A27E9E /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		6357A01C2AA58BBD00A27E9E /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +79,12 @@
 				63579FF42AA5426800A27E9E /* View */,
 				63579FF72AA5517200A27E9E /* Models */,
 				63579FD82AA53C3400A27E9E /* CaloteXApp.swift */,
-				63579FDA2AA53C3400A27E9E /* Persistence.swift */,
 				63579FDF2AA53C3400A27E9E /* ContentView.swift */,
 				63579FE12AA53C3500A27E9E /* Assets.xcassets */,
 				63579FE32AA53C3500A27E9E /* CaloteX.entitlements */,
 				63579FDC2AA53C3400A27E9E /* CaloteX.xcdatamodeld */,
+				6357A01C2AA58BBD00A27E9E /* CoreDataViewModel.swift */,
+				63579FDA2AA53C3400A27E9E /* Persistence.swift */,
 				63579FE42AA53C3500A27E9E /* Preview Content */,
 			);
 			path = CaloteX;
@@ -207,6 +210,7 @@
 				63579FFE2AA551CE00A27E9E /* Debtor+CoreDataClass.swift in Sources */,
 				63579FDE2AA53C3400A27E9E /* CaloteX.xcdatamodeld in Sources */,
 				63579FE02AA53C3400A27E9E /* ContentView.swift in Sources */,
+				6357A01D2AA58BBD00A27E9E /* CoreDataViewModel.swift in Sources */,
 				6357A00B2AA5654900A27E9E /* Formatters.swift in Sources */,
 				6357A0032AA5630000A27E9E /* Dashboard.swift in Sources */,
 				6357A0012AA5599300A27E9E /* CustomTabBar.swift in Sources */,

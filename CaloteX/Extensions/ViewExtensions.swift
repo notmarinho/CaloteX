@@ -8,11 +8,8 @@
 import SwiftUI
 
 extension View {
-    func withEnviromentObjects() -> some View {
-        let persistenceController = PersistenceController.instace
-
+    func previewWithEnviromentObjects() -> some View {
         return self
-            .environment(\.managedObjectContext, persistenceController.container.viewContext)
             .environmentObject(AppStateViewModel())
     }
     

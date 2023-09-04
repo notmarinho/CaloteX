@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var context
+    @EnvironmentObject var CoreDataVM: CoreDataViewModel
     
     @FetchRequest(
         sortDescriptors: [],
@@ -29,16 +29,11 @@ struct ContentView: View {
             }
             List {
                 ForEach(debtors) { debtor in
-                    Section(debtor.wName) {
-                        Button {
-                            editingDebtor = debtor
-                        } label: {
-                            Label("Adicionar Gasto", systemImage: "plus")
-                        }
-                        
+                    
+                    Section {
                         ForEach(debtor.expenseArray) { expense in
                             HStack {
-                                Text(expense.wName)
+                                Text(expense.title)
                                     .font(.body)
                                 Spacer()
                                 Text(expense.currencyValue)
@@ -47,7 +42,18 @@ struct ContentView: View {
                                 Label("Pagar", systemImage: "plus")
                             }
                         }
-                        
+                    } header: {
+                        NavigationLink(destination: CreateExpense(debtor: debtor)) {
+                            HStack {
+                                Text(debtor.name)
+                                Spacer()
+                                HStack {
+                                    Label("Adicionar Gasto", systemImage: "dollarsign.circle.fill")
+                                }
+                            }
+                        }
+                        .buttonStyle(.plain)
+                    } footer: {
                         HStack {
                             Text("Total")
                                 .fontWeight(.bold)
@@ -56,8 +62,9 @@ struct ContentView: View {
                                 .frame(maxWidth: .infinity, alignment: .trailing)
                                 .fontWeight(.bold)
                         }
-                        
                     }
+                    
+                    
                 }
             }
             .sheet(isPresented: $showingDebtorSheet) {
@@ -71,22 +78,18 @@ struct ContentView: View {
             }
             .sheet(item: $editingDebtor) { debtor in
                 CreateExpense(debtor: debtor)
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
             }
             .navigationTitle("Dashboard")
         }
     }
     
     func handleSaveNewDebtor() {
-        let newDebtor = Debtor(context: context)
-        newDebtor.name = debtorName
+        CoreDataVM.addDebtor(name: debtorName)
         
-        do {
-            try context.save()
-            debtorName = ""
-            showingDebtorSheet = false
-        } catch {
-            print("Error saving debtor: \(error.localizedDescription)")
-        }
+        debtorName = ""
+        showingDebtorSheet = false
     }
 }
 

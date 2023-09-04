@@ -9,9 +9,8 @@ import SwiftUI
 
 @main
 struct CaloteXApp: App {
-    let persistenceController = PersistenceController.instace
-    
     @State private var selectedTab: Tab = .house
+    @StateObject var CoreDataVM = CoreDataViewModel()
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -32,14 +31,16 @@ struct CaloteXApp: App {
                             Text("Configurações")
                                 .tag(Tab.gearshape)
                         }
+                       
                     }
                     VStack {
                         Spacer()
                         CustomTabBar(selectedTab: $selectedTab)
                     }
                 }
-                .withEnviromentObjects()
             }
+            .environmentObject(CoreDataVM)
+            .environment(\.managedObjectContext, CoreDataVM.context)
         }
     }
 }

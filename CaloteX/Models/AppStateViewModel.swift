@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import CoreData
 
 class AppStateViewModel: ObservableObject {
+    let persistenceController = PersistenceController.instace
+    
     @Published var period: Date = Date()
     
     func updatePeriod(newPeriod: Date) {

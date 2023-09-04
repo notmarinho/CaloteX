@@ -11,12 +11,14 @@ import CoreData
 
 @objc(Expense)
 public class Expense: NSManagedObject {
-    var wName: String {
-        self.name ?? "Gasto Desconhecido"
+    var title: String {
+        get { self.title_ ?? "Gasto Desconhecido" }
+        set { self.title_ = newValue }
     }
     
-    var wDate: Date {
-        self.date ?? Date()
+    var date: Date {
+        get { self.date_ ?? Date() }
+        set { self.date_ = newValue }
     }
     
     var currencyValue: String {

@@ -19,24 +19,36 @@ struct ContentView: View {
     @State var showingDebtorSheet = false
     @State var showingExpenseSheet = false
     @State var debtorName = ""
-    
-    @State var editingDebtor: Debtor? = nil
-    
+        
     var body: some View {
         VStack {
-            Button("Adicionar Devedor") {
-                showingDebtorSheet.toggle()
-            }
             List {
                 ForEach(debtors) { debtor in
                     
                     Section {
                         ForEach(debtor.expenseArray) { expense in
                             HStack {
-                                Text(expense.title)
-                                    .font(.body)
+                                HStack {
+                                    if expense.isPaid {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(Color(.systemGreen))
+
+                                    }
+                                    Text(expense.title)
+                                        .font(.body)
+                                }
+                               
                                 Spacer()
                                 Text(expense.currencyValue)
+                            }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    // @TODO - Function to toggle is paid.
+                                } label: {
+                                    Label("Pago", systemImage: "checkmark.circle.fill")
+                                }
+                                .tint(.green)
+
                             }
                         }
                         .onDelete { indexSet in
@@ -70,21 +82,7 @@ struct ContentView: View {
                     
                 }
             }
-            .sheet(isPresented: $showingDebtorSheet) {
-                VStack {
-                    TextField("Nome do Devedor", text: $debtorName)
-                    Spacer()
-                    Button(action: handleSaveNewDebtor) {
-                        Text("Adicionar Devedor")
-                    }.disabled(debtorName.isEmpty)
-                }
-            }
-            .sheet(item: $editingDebtor) { debtor in
-                CreateExpense(debtor: debtor)
-                    .presentationDetents([.medium, .large])
-                    .presentationDragIndicator(.visible)
-            }
-            .navigationTitle("Dashboard")
+            .navigationTitle("Devedores")
         }
     }
     

@@ -22,6 +22,10 @@
 		6357A01D2AA58BBD00A27E9E /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6357A01C2AA58BBD00A27E9E /* CoreDataViewModel.swift */; };
 		635F38B32AA695FF00884932 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635F38B22AA695FF00884932 /* SettingsView.swift */; };
 		635F38B52AA6962800884932 /* CreateDebtorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635F38B42AA6962800884932 /* CreateDebtorView.swift */; };
+		635F38B72AA6DA1500884932 /* DebtorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635F38B62AA6DA1500884932 /* DebtorDetailView.swift */; };
+		635F38B92AA6E86900884932 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635F38B82AA6E86900884932 /* NavigationViewModel.swift */; };
+		635F38BB2AA6EBE800884932 /* NumericKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635F38BA2AA6EBE800884932 /* NumericKeyboardView.swift */; };
+		635F38BD2AA6EC1F00884932 /* HapticalFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635F38BC2AA6EC1F00884932 /* HapticalFeedback.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		6357A01C2AA58BBD00A27E9E /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
 		635F38B22AA695FF00884932 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		635F38B42AA6962800884932 /* CreateDebtorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDebtorView.swift; sourceTree = "<group>"; };
+		635F38B62AA6DA1500884932 /* DebtorDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebtorDetailView.swift; sourceTree = "<group>"; };
+		635F38B82AA6E86900884932 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
+		635F38BA2AA6EBE800884932 /* NumericKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericKeyboardView.swift; sourceTree = "<group>"; };
+		635F38BC2AA6EC1F00884932 /* HapticalFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticalFeedback.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +112,8 @@
 				635F38B22AA695FF00884932 /* SettingsView.swift */,
 				6357A0022AA5630000A27E9E /* Dashboard.swift */,
 				6357A0002AA5599300A27E9E /* CustomTabBar.swift */,
+				635F38B62AA6DA1500884932 /* DebtorDetailView.swift */,
+				635F38BA2AA6EBE800884932 /* NumericKeyboardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -114,6 +124,7 @@
 				63579FF82AA551CE00A27E9E /* Expense+CoreDataClass.swift */,
 				63579FFA2AA551CE00A27E9E /* Debtor+CoreDataClass.swift */,
 				6357A01C2AA58BBD00A27E9E /* CoreDataViewModel.swift */,
+				635F38B82AA6E86900884932 /* NavigationViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -130,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				6357A00A2AA5654900A27E9E /* Formatters.swift */,
+				635F38BC2AA6EC1F00884932 /* HapticalFeedback.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -207,8 +219,12 @@
 				6357A0082AA564BC00A27E9E /* ViewExtensions.swift in Sources */,
 				63579FD92AA53C3400A27E9E /* CaloteXApp.swift in Sources */,
 				63579FFE2AA551CE00A27E9E /* Debtor+CoreDataClass.swift in Sources */,
+				635F38BD2AA6EC1F00884932 /* HapticalFeedback.swift in Sources */,
+				635F38BB2AA6EBE800884932 /* NumericKeyboardView.swift in Sources */,
 				63579FDE2AA53C3400A27E9E /* CaloteX.xcdatamodeld in Sources */,
 				63579FE02AA53C3400A27E9E /* ContentView.swift in Sources */,
+				635F38B72AA6DA1500884932 /* DebtorDetailView.swift in Sources */,
+				635F38B92AA6E86900884932 /* NavigationViewModel.swift in Sources */,
 				6357A01D2AA58BBD00A27E9E /* CoreDataViewModel.swift in Sources */,
 				6357A00B2AA5654900A27E9E /* Formatters.swift in Sources */,
 				6357A0032AA5630000A27E9E /* Dashboard.swift in Sources */,

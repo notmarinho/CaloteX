@@ -22,11 +22,11 @@ struct CustomTabBar: View {
     private var tabColor: Color {
         switch selectedTab {
         case .house:
-                return .blue
+            return .blue
         case .dollar:
-              return  .orange
+            return  .orange
         case .gearshape:
-               return .gray
+            return .gray
         }
     }
     
@@ -44,14 +44,28 @@ struct CustomTabBar: View {
                                 selectedTab = tab
                             }
                         }
+                    
                     Spacer()
                 }
             }
-            .frame(width: nil, height: 60)
-            .background(.thinMaterial)
-            .cornerRadius(10)
             .padding()
+            .background(
+                VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
+                    .clipShape(RoundedRectangle(cornerRadius: 30))
+            )
+            .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 0)
+            .padding(.horizontal)
         }
+    }
+}
+
+struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView {
+        return UIVisualEffectView(effect: effect)
+    }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) {
+        uiView.effect = effect
     }
 }
 

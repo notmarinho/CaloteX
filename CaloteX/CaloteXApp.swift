@@ -11,35 +11,43 @@ import SwiftUI
 struct CaloteXApp: App {
     @State private var selectedTab: Tab = .house
     @StateObject var CoreDataVM = CoreDataViewModel()
+    @StateObject var NavigationVM = NavigationViewModel()
     
     init() {
         UITabBar.appearance().isHidden = true
     }
-
+    
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                ZStack {
-                    VStack {
-                        TabView(selection: $selectedTab) {
-                            ContentView()
-                                .tag(Tab.house)
-                            
-                            Text("Novo Gasto")
-                                .tag(Tab.dollar)
-                            
-                            SettingsView()
-                                .tag(Tab.gearshape)
+            ZStack {
+                VStack {
+                    TabView(selection: $selectedTab) {
+                        NavigationView {
+                            Dashboard()
                         }
-                       
+                        .tag(Tab.house)
+                        
+                        NavigationView {
+                            ContentView()
+                                .navigationBarHidden(true)
+                        }
+                        .tag(Tab.dollar)
+                        
+                        NavigationView {
+                            SettingsView()
+                        }
+                        .tag(Tab.gearshape)
                     }
-                    VStack {
-                        Spacer()
+                }
+                VStack {
+                    Spacer()
+                    if NavigationVM.showingTabBar {
                         CustomTabBar(selectedTab: $selectedTab)
                     }
                 }
             }
             .environmentObject(CoreDataVM)
+            .environmentObject(NavigationVM)
             .environment(\.managedObjectContext, CoreDataVM.context)
         }
     }

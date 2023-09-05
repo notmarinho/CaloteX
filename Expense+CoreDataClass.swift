@@ -36,4 +36,16 @@ public class Expense: NSManagedObject {
             print("Error deleting object: \(error)")
         }
     }
+    
+    func toggleIsPaid() {
+        let context = self.managedObjectContext
+        
+        self.isPaid.toggle()
+        
+        do {
+            try context?.save()
+        } catch let error {
+            print("Error trying to toggle isPaid \(error.localizedDescription)")
+        }
+    }
 }

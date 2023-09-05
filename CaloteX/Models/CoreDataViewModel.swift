@@ -32,10 +32,10 @@ class CoreDataViewModel: ObservableObject {
         period = to
     }
     
-    func addExpense(title: String, value: String, date: Date, debtor: Debtor) {
+    func addExpense(title: String, value: Double, date: Date, debtor: Debtor) {
         let newExpense = Expense(context: context)
         newExpense.title = title
-        newExpense.value = Double(value) ?? 0
+        newExpense.value = value
         newExpense.date = date
         newExpense.owner = debtor
         

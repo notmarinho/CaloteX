@@ -14,6 +14,7 @@ struct SettingsView: View {
                 Text("Criar Devedor")
             }
         }
+        .navigationTitle("Configurações")
     }
 }
 

@@ -29,5 +29,5 @@ func dateFormatter(_ date: Date, format: String? = nil) -> String {
         formatter.timeStyle = .none
     }
 
-    return formatter.string(from: date)
+    return formatter.string(from: date).capitalized
 }

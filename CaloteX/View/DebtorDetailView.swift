@@ -13,7 +13,12 @@ struct DebtorDetailView: View {
         VStack {
             ForEach(debtor.expenseArray) { expense in
                 LabeledContent(expense.title, value: expense.currencyValue)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(6)
+                    .padding(.horizontal)
             }
+            Spacer()
         }
         .navigationTitle("Mateus")
     }
